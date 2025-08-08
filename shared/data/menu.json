@@ -4,6 +4,27 @@
     "title": "Home",
     "icon": "home"
   },
+  "leads": {
+    "title": "Lead Management",
+    "icon": "users",
+    "children": {
+      "leads-management": {
+        "title": "Leads Dashboard",
+        "url": "leads-management.html",
+        "badge": "New"
+      },
+      "import-leads": {
+        "title": "Import Leads",
+        "url": "leads-management.html#import",
+        "icon": "upload"
+      },
+      "lead-analytics": {
+        "title": "Analytics",
+        "url": "charts.html",
+        "icon": "chart-line"
+      }
+    }
+  },
   "base": {
     "title": "Interface",
     "icon": "package",

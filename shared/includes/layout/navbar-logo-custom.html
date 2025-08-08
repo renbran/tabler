@@ -1,0 +1,41 @@
+<!-- Custom Leads Management System Logo -->
+{%- assign prefix = include.prefix | default: 'navbar' -%}
+{%- assign breakpoint = include.breakpoint | default: 'lg' -%}
+{%- capture class-attr %} class="{{ prefix }}-brand {{ prefix }}-brand-autodark{% if include.class %} {{ include.class }}{% endif %}"{%- endcapture -%}
+{%- if include.header -%}
+<div {{ class-attr }}>
+	<a href="{{ page | relative }}{% if include.href %}/{{ include.href }}{% endif %}" aria-label="Lead Management System">
+{%- else -%}
+	<a href="{{ page | relative }}{% if include.href %}/{{ include.href }}{% endif %}" aria-label="Lead Management System"{{ class-attr }}>
+{%- endif -%}
+	{%- unless include.hide-logo -%}
+	{%- if include.small-logo -%}
+	<!-- Small Logo -->
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="32" height="32" 
+     aria-label="Lead Management System" class="navbar-brand-image{% if include.show-title %} me-3{% endif %}">
+		<rect width="48" height="48" rx="8" fill="#2563eb"/>
+		<path d="M16 14h-2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h2m0-20h16m-16 0v20m16-20h2a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-2m0-20v20M18 20h8m-8 4h12m-12 4h8" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+	</svg>
+	{%- else -%}
+	<!-- Full Logo with Text -->
+	<svg xmlns="http://www.w3.org/2000/svg" width="200" height="32" viewBox="0 0 200 32" class="navbar-brand-image{% if include.show-title %} me-3{% endif %}">
+		<!-- Logo Icon -->
+		<rect x="0" y="4" width="24" height="24" rx="4" fill="#2563eb"/>
+		<path d="M8 9h-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h1m0-10h8m-8 0v10m8-10h1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-1m0-10v10M9 12h4m-4 2h6m-6 2h4" stroke="white" stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+		
+		<!-- Text -->
+		<text x="32" y="22" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="16" font-weight="600" fill="currentColor">
+			Lead Manager
+		</text>
+	</svg>
+	{%- endif %}
+	{%- endunless -%}
+	{%- if include.show-title -%}
+	Lead Management System
+	{%- endif -%}
+{%- if include.header -%}
+	</a>
+</div>
+{%- else -%}
+	</a>
+{%- endif -%}

@@ -1,0 +1,52 @@
+// Custom Branding Variables for Lead Management System
+// Override default Tabler variables with your brand colors
+
+// BRAND COLORS
+$brand-primary: hsl(353, 88%, 23%);    // Professional blue
+$brand-secondary: #64748b;  // Slate gray
+$brand-success: #10b981;    // Emerald green
+$brand-warning: #f59e0b;    // Amber
+$brand-danger: #ef4444;     // Red
+$brand-info: #06b6d4;       // Cyan
+
+// CUSTOM THEME COLORS
+$primary: $brand-primary !default;
+$secondary: $brand-secondary !default;
+$success: $brand-success !default;
+$warning: $brand-warning !default;
+$danger: $brand-danger !default;
+$info: $brand-info !default;
+
+// BRAND FONTS
+$brand-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !default;
+$font-family-sans-serif: $brand-font-family !default;
+
+// BRAND SPECIFIC VARIABLES
+$navbar-brand-color: $brand-primary !default;
+$sidebar-brand-color: $brand-primary !default;
+$button-primary-bg: $brand-primary !default;
+$link-color: $brand-primary !default;
+
+// CUSTOM SPACING
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 4,
+  7: $spacer * 5,
+  8: $spacer * 6
+) !default;
+
+// BORDER RADIUS
+$border-radius-sm: 0.375rem !default;
+$border-radius: 0.5rem !default;
+$border-radius-lg: 0.75rem !default;
+
+// SHADOWS
+$box-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !default;
+$box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06) !default;
+$box-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !default;

@@ -1,0 +1,446 @@
+---
+title: Leads Management
+page-header: Leads Management System
+page-libs: [lists]
+page-menu: leads.management
+layout: default
+permalink: leads-management.html
+---
+
+<script src="{{ '/js/leads-management.js' | relative_url }}"></script>
+
+<div class="container-xl">
+  <!-- Page header -->
+  <div class="page-header d-print-none">
+    <div class="container-xl">
+      <div class="row g-2 align-items-center">
+        <div class="col">
+          <h2 class="page-title">
+            Leads Management
+          </h2>
+          <div class="text-muted mt-1">Manage and track your sales leads efficiently</div>
+        </div>
+        <div class="col-auto ms-auto d-print-none">
+          <div class="btn-list">
+            <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-import-leads">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Import Leads
+            </a>
+            <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-import-leads">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="row row-deck row-cards mb-4">
+    <div class="col-sm-6 col-lg-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="subheader">Total Leads</div>
+            <div class="ms-auto lh-1">
+              <div class="dropdown">
+                <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown">Last 7 days</a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <a class="dropdown-item" href="#">Last 7 days</a>
+                  <a class="dropdown-item" href="#">Last 30 days</a>
+                  <a class="dropdown-item" href="#">Last 3 months</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="h1 mb-3">{{ leads | size }}</div>
+          <div class="d-flex mb-2">
+            <div class="flex-fill">
+              <div class="progress progress-sm">
+                <div class="progress-bar bg-primary" style="width: 75%" role="progressbar"></div>
+              </div>
+            </div>
+            <div class="text-green d-flex align-items-center ms-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3,17 9,11 13,15 21,7"/><polyline points="14,7 21,7 21,14"/></svg>
+              12%
+            </div>
+          </div>
+          <div class="text-muted">This week</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="subheader">New Leads</div>
+          </div>
+          <div class="h1 mb-3">{{ leads | where: "Stage", "NEW" | size }}</div>
+          <div class="d-flex mb-2">
+            <div class="flex-fill">
+              <div class="progress progress-sm">
+                <div class="progress-bar bg-success" style="width: 60%" role="progressbar"></div>
+              </div>
+            </div>
+            <div class="text-green d-flex align-items-center ms-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3,17 9,11 13,15 21,7"/><polyline points="14,7 21,7 21,14"/></svg>
+              8%
+            </div>
+          </div>
+          <div class="text-muted">Requiring attention</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="subheader">In Progress</div>
+          </div>
+          <div class="h1 mb-3">{{ leads | where: "Stage", "ATTEMPT" | size }}</div>
+          <div class="d-flex mb-2">
+            <div class="flex-fill">
+              <div class="progress progress-sm">
+                <div class="progress-bar bg-warning" style="width: 45%" role="progressbar"></div>
+              </div>
+            </div>
+            <div class="text-yellow d-flex align-items-center ms-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3,17 9,11 13,15 21,7"/><polyline points="14,7 21,7 21,14"/></svg>
+              5%
+            </div>
+          </div>
+          <div class="text-muted">Being processed</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="subheader">Converted</div>
+          </div>
+          <div class="h1 mb-3">{{ leads | where: "Stage", "CUSTOMER" | size }}</div>
+          <div class="d-flex mb-2">
+            <div class="flex-fill">
+              <div class="progress progress-sm">
+                <div class="progress-bar bg-success" style="width: 85%" role="progressbar"></div>
+              </div>
+            </div>
+            <div class="text-green d-flex align-items-center ms-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="3,17 9,11 13,15 21,7"/><polyline points="14,7 21,7 21,14"/></svg>
+              22%
+            </div>
+          </div>
+          <div class="text-muted">Success rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters and Search -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-3">
+              <label class="form-label">Search</label>
+              <input type="text" class="form-control" placeholder="Search leads..." id="search-leads">
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Stage</label>
+              <select class="form-select" id="filter-stage">
+                <option value="">All Stages</option>
+                <option value="NEW">New</option>
+                <option value="ATTEMPT">Attempt</option>
+                <option value="CONTACTED">Contacted</option>
+                <option value="OPTIONS SENT">Options Sent</option>
+                <option value="CUSTOMER">Customer</option>
+                <option value="UNSUCCESSFUL">Unsuccessful</option>
+                <option value="Junk Lead">Junk Lead</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Source</label>
+              <select class="form-select" id="filter-source">
+                <option value="">All Sources</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Special Referral">Special Referral</option>
+                <option value="Call">Call</option>
+                <option value="E-Mail">E-Mail</option>
+                <option value="WhatsApp">WhatsApp</option>
+                <option value="Landing Page">Landing Page</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Responsible</label>
+              <select class="form-select" id="filter-responsible">
+                <option value="">All Agents</option>
+                <option value="Adnan Arif">Adnan Arif</option>
+                <option value="Rita Sfeir">Rita Sfeir</option>
+                <option value="Samia Khan">Samia Khan</option>
+                <option value="Mehdi Mofidi">Mehdi Mofidi</option>
+                <option value="Faraaz Arif">Faraaz Arif</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Date Range</label>
+              <input type="date" class="form-control" id="filter-date">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leads Table -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Leads Database</h3>
+      <div class="card-actions">
+        <a href="#" class="btn btn-outline-primary btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/><line x1="9" y1="9" x2="10" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+          Export
+        </a>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-vcenter card-table" id="leads-table">
+        <thead>
+          <tr>
+            <th><button class="table-sort" data-sort="sort-id">ID</button></th>
+            <th><button class="table-sort" data-sort="sort-name">Lead Name</button></th>
+            <th><button class="table-sort" data-sort="sort-stage">Stage</button></th>
+            <th><button class="table-sort" data-sort="sort-source">Source</button></th>
+            <th><button class="table-sort" data-sort="sort-responsible">Responsible</button></th>
+            <th><button class="table-sort" data-sort="sort-created">Created</button></th>
+            <th><button class="table-sort" data-sort="sort-followup">Follow Up</button></th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody class="table-tbody">
+          <!-- Lead rows will be populated here via JavaScript -->
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer d-flex align-items-center">
+      <p class="m-0 text-muted">Showing <span id="showing-count">1 to 10</span> of <span id="total-count">150</span> entries</p>
+      <ul class="pagination m-0 ms-auto">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="15,6 9,12 15,18"/></svg>
+            prev
+          </a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">
+            next
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="9,6 15,12 9,18"/></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Import Leads Modal -->
+<div class="modal modal-blur fade" id="modal-import-leads" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Import Leads</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Choose CSV file</label>
+          <input type="file" class="form-control" accept=".csv" id="csv-file-input">
+          <div class="form-hint">Upload a CSV file with leads data. The file should contain columns: ID, Lead Name, Stage, First Name, Created, Follow Up, Source, Responsible, Language</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-check">
+            <input type="checkbox" class="form-check-input" checked>
+            <span class="form-check-label">Skip duplicate leads</span>
+          </label>
+        </div>
+        <div id="import-preview" class="d-none">
+          <h6>Preview (first 5 rows):</h6>
+          <div class="table-responsive">
+            <table class="table table-sm" id="preview-table">
+              <!-- Preview content will be populated here -->
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</a>
+        <button type="button" class="btn btn-primary ms-auto" id="import-leads-btn" disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-sm" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"/><line x1="9" y1="9" x2="10" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>
+          Import Leads
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Leads data will be loaded here
+let leadsData = [];
+
+// Function to get stage badge class
+function getStageClass(stage) {
+  const stageClasses = {
+    'NEW': 'badge-primary',
+    'ATTEMPT': 'badge-warning',
+    'CONTACTED': 'badge-info',
+    'OPTIONS SENT': 'badge-purple',
+    'CUSTOMER': 'badge-success',
+    'UNSUCCESSFUL': 'badge-danger',
+    'Junk Lead': 'badge-secondary',
+    'IDLE': 'badge-orange'
+  };
+  return stageClasses[stage] || 'badge-secondary';
+}
+
+// Function to render leads table
+function renderLeadsTable(leads = leadsData) {
+  const tbody = document.querySelector('#leads-table tbody');
+  if (!tbody) return;
+  
+  tbody.innerHTML = leads.map(lead => `
+    <tr>
+      <td class="sort-id">${lead.ID}</td>
+      <td class="sort-name">
+        <div class="d-flex py-1 align-items-center">
+          <span class="avatar avatar-sm me-2">${lead['First Name'] ? lead['First Name'].charAt(0).toUpperCase() : 'L'}</span>
+          <div class="flex-fill">
+            <div class="font-weight-medium">${lead['Lead Name']}</div>
+            <div class="text-muted">${lead['First Name'] || ''}</div>
+          </div>
+        </div>
+      </td>
+      <td class="sort-stage">
+        <span class="badge ${getStageClass(lead.Stage)}">${lead.Stage}</span>
+      </td>
+      <td class="sort-source">${lead.Source}</td>
+      <td class="sort-responsible">${lead.Responsible}</td>
+      <td class="sort-created">${lead.Created}</td>
+      <td class="sort-followup">${lead['Follow Up']}</td>
+      <td>
+        <div class="btn-list flex-nowrap">
+          <a href="#" class="btn btn-white btn-sm">Edit</a>
+          <div class="dropdown">
+            <button class="btn btn-white btn-sm dropdown-toggle align-text-top" data-bs-toggle="dropdown">Actions</button>
+            <div class="dropdown-menu dropdown-menu-end">
+              <a class="dropdown-item" href="#">View Details</a>
+              <a class="dropdown-item" href="#">Send Email</a>
+              <a class="dropdown-item" href="#">Call</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-danger" href="#">Delete</a>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// CSV Import functionality
+document.getElementById('csv-file-input').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const csv = e.target.result;
+    const lines = csv.split('\n');
+    const headers = lines[0].split(',').map(h => h.trim());
+    
+    // Parse CSV data
+    const data = [];
+    for (let i = 1; i < Math.min(6, lines.length); i++) { // Show first 5 rows for preview
+      if (lines[i].trim()) {
+        const values = lines[i].split(',').map(v => v.trim());
+        const row = {};
+        headers.forEach((header, index) => {
+          row[header] = values[index] || '';
+        });
+        data.push(row);
+      }
+    }
+    
+    // Show preview
+    if (data.length > 0) {
+      const previewDiv = document.getElementById('import-preview');
+      const previewTable = document.getElementById('preview-table');
+      
+      previewTable.innerHTML = `
+        <thead>
+          <tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr>
+        </thead>
+        <tbody>
+          ${data.map(row => `<tr>${headers.map(h => `<td>${row[h]}</td>`).join('')}</tr>`).join('')}
+        </tbody>
+      `;
+      
+      previewDiv.classList.remove('d-none');
+      document.getElementById('import-leads-btn').disabled = false;
+    }
+  };
+  
+  reader.readAsText(file);
+});
+
+// Import leads button click
+document.getElementById('import-leads-btn').addEventListener('click', function() {
+  const fileInput = document.getElementById('csv-file-input');
+  const file = fileInput.files[0];
+  
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const csv = e.target.result;
+    const lines = csv.split('\n');
+    const headers = lines[0].split(',').map(h => h.trim());
+    
+    // Parse all CSV data
+    const newLeads = [];
+    for (let i = 1; i < lines.length; i++) {
+      if (lines[i].trim()) {
+        const values = lines[i].split(',').map(v => v.trim());
+        const row = {};
+        headers.forEach((header, index) => {
+          row[header] = values[index] || '';
+        });
+        newLeads.push(row);
+      }
+    }
+    
+    // Add to leads data
+    leadsData = newLeads;
+    renderLeadsTable();
+    
+    // Close modal and show success message
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modal-import-leads'));
+    modal.hide();
+    
+    // Show success notification
+    alert(`Successfully imported ${newLeads.length} leads!`);
+  };
+  
+  reader.readAsText(file);
+});
+
+// Initialize table when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  // If no data is loaded, we can start with sample data or empty state
+  if (leadsData.length === 0) {
+    renderLeadsTable([]);
+  }
+});
+</script>
